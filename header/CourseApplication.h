@@ -7,7 +7,7 @@
 class CourseApplication {
 	friend ofstream& operator<<(ofstream& os, const CourseApplication& ca);
 public:
-	CourseApplication();
+	CourseApplication(string grad, string num);
 	CourseApplication(string grad, list<string> subNum);
 
 	string getGradNum();
