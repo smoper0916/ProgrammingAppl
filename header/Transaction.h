@@ -3,10 +3,9 @@
 
 class Transaction {
 public:
-
+	virtual void execute() = 0;
 private:
 
 
 };
-
 #endif
