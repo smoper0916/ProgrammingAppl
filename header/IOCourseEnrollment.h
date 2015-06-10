@@ -6,7 +6,7 @@
 
 class IOCourseEnrollment : public IOHandler {
 public:
-	IOCourseEnrollment(string fileName = "");
+	IOCourseEnrollment(string fileName);
 
 	//	파일저장 함수
 	void save(void* object);
