@@ -1,14 +1,5 @@
 #include "EnrollCourse.h"
 
-EnrollCourse::EnrollCourse()
-{
-
-}
-
-EnrollCourse::~EnrollCourse()
-{
-
-}
 void EnrollCourse::processMenu(int menuNum){
 	switch (menuNum)
 	{
@@ -19,4 +10,13 @@ void EnrollCourse::processMenu(int menuNum){
 	default:
 		break;
 	}
+}
+void EnrollCourse::execute(){
+	int menuNum;
+	Screen().ChangeCourseMenu();
+	menuNum = Keypad().getNextInt();
+
+	if (menuNum == 4)
+		return;
+	processMenu(menuNum);
 }

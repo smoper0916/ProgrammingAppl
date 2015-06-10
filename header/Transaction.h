@@ -7,9 +7,12 @@
 
 class Transaction {
 public:
+	Transaction(string fileName){}
 	virtual void execute() = 0;
+
+	string getFileName(){ return fileName; }
+	void setFIleName(string fileName){ this->fileName = fileName; }
 private:
-
-
+	string fileName;
 };
 #endif
