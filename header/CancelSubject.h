@@ -1,14 +1,15 @@
 #ifndef _CANCELSUBJECT_H_
 #define _CANCELSUBJECT_H_
 
-#include "CourseTransaction.h"
+#include "Transaction.h"
+#include "IOCourseEnrollment.h"
+#include "Screen.h"
 
-class CancelSubject : public CourseTransaction {
+class CancelSubject : public Transaction {
 public:
-	CancelSubject();
+	CancelSubject(string fileName);
 
-private:
-
+	virtual void execute();
 };
 
 #endif

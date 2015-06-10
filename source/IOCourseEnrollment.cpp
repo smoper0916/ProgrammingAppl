@@ -12,12 +12,12 @@ void IOCourseEnrollment::save(void* object) {
 		ofstream os;
 		string temp;
 
+		os.open(getFileName(), ios::in || ios::out);
 		initialization(object);
 
-		os.open(getFileName(), ios::in || ios::out);
-
 		if (!os) throw "";
-
+		if (find(object) == NULL)	throw "";
+				
 		os.seekp(find(object), ios::beg);
 		os << stNum << " ";
 		
@@ -29,18 +29,35 @@ void IOCourseEnrollment::save(void* object) {
 	}
 }
 
+void IOCourseEnrollment::erase(void* object) {
+	if (typeid(object) != typeid(CourseApplication))
+		throw "";
+	else {
+		CourseApplication* cA = (CourseApplication*)object;
+		ofstream os;
+		string temp;
+
+		os.open(getFileName(), ios::in || ios::out);
+		initialization(object);
+
+		if (!os) throw "";
+		if (find(object) == NULL)	throw "";
+
+		os.seekp(find(object), ios::beg);
+		os << " ";
+	}
+}
+
 int IOCourseEnrollment::find(void* object) {
-	ifstream is;
+	ifstream is(getFileName());
 	string temp;	int pos = 0;
+
+	if (!is) throw "";
 
 	if (typeid(object) != typeid(CourseApplication))
 		throw "";
 	else {
 		CourseApplication* cApp = (CourseApplication*)object;
-
-		is.open(getFileName());
-
-		if (!is) throw "";
 
 		while (1) {
 			is >> temp;
@@ -48,6 +65,13 @@ int IOCourseEnrollment::find(void* object) {
 			if (temp == cApp->getGradNum()) {
 				pos = is.tellg();
 				pos--;
+
+				is.close();
+				return pos;
+			}
+			else {
+				is.seekg(0, ios::end);
+				pos = is.tellg();
 
 				is.close();
 				return pos;
