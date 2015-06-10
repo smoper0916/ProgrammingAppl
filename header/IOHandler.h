@@ -16,6 +16,8 @@ public:
 	string getFileName(){ return fileName; }
 
 	virtual void* load(string key = "") = 0;
+	virtual void* get(ifstream& is);
+	virtual void* get(ifstream& is, string key);
 
 private:
 	string fileName;
