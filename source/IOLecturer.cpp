@@ -1,7 +1,7 @@
 #include "IOLecturer.h"
 
 
-void* IOLecturer::load(string key = ""){
+void* IOLecturer::load(string key){
 	ifstream is(getFileName());
 
 	if (is.fail()){
