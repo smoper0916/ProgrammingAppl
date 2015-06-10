@@ -60,17 +60,25 @@ int IOCourseEnrollment::find(void* object) {
 }
 
 void* IOCourseEnrollment::load(string key) {
-	ifstream is;
+	ifstream is(getFileName());
+
+	if (!is)	return NULL;
+
+	if (key == "")		return get(is);
+	else				return get(is, key);
+
+	is.close();
+	return NULL;
+}
+
+void* IOCourseEnrollment::get(ifstream& is) {
+	vector<CourseApplication>* v = new vector<CourseApplication>();
 	string temp;
 
-	is.open(getFileName());
-
-	if (!is) throw "";
-
-	while (1) {
+	while (true) {
 		is >> stNum;
 
-		while (1) {
+		while (true) {
 			is >> temp;
 			if (temp == "\n\r")	break;
 
@@ -78,15 +86,34 @@ void* IOCourseEnrollment::load(string key) {
 		}
 
 		if (is.eof())	break;
+		
+		v->push_back(CourseApplication(stNum, subNum));
 
-		if (stNum == key) {
-			is.close();
-			return new CourseApplication(stNum, subNum);
-		}
+		subNum.clear();
 	}
 
 	is.close();
+	return v;
+}
 
+void* IOCourseEnrollment::get(ifstream& is, string key) {
+	string temp;
+
+	while (true) {
+		is >> stNum;
+
+		while (true) {
+			is >> temp;
+			if (temp == "\n\r")	break;
+
+			subNum.push_back(temp);
+		}
+
+		if (is.eof())	break;
+		if (stNum == key)	return new CourseApplication(stNum, subNum);
+	}
+
+	is.close();
 	return NULL;
 }
 

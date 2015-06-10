@@ -14,6 +14,8 @@ public:
 	int find(void* object);
 
 	virtual void* load(string key = "");
+	virtual void* get(ifstream& is);
+	virtual void* get(ifstream& is, string key);
 
 private:
 	virtual void initialization(void* object);
