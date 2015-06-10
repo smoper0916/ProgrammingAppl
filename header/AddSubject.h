@@ -1,14 +1,15 @@
 #ifndef _ADDSUBJECT_H_
 #define _ADDSUBJECT_H_
 
-#include "CourseTransaction.h"
+#include "Transaction.h"
+#include "IOCourseEnrollment.h"
+#include "IOEstablishedCourse.h"
 
-class AddSubject : public CourseTransaction {
+class AddSubject : public Transaction {
 public:
-	AddSubject();
+	AddSubject(string fileName = "");
 
-private:
-
+	virtual void execute();
 };
 
 #endif
