@@ -5,6 +5,7 @@
 #include "Student.h"
 
 class CourseApplication {
+	friend ofstream& operator<<(ofstream& os, const CourseApplication& ca);
 public:
 	CourseApplication();
 	CourseApplication(string grad, list<string> subNum);
