@@ -6,7 +6,7 @@
 
 class IOEstablishedCourse : public IOHandler {
 public:
-	IOEstablishedCourse();
+	IOEstablishedCourse(string fileName):IOHandler(fileName){}
 
 	virtual void* load(string key = "");
 	virtual void* get(ifstream& is);
