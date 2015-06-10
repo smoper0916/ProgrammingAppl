@@ -6,10 +6,11 @@
 
 class IOCourse : public IOHandler {
 public:
-	IOCourse();
+	IOCourse(string fileName = "");
 	
-	virtual void save(void* object);
 	virtual void* load(string key = "");
+	virtual void* get(ifstream& is);
+	virtual void* get(ifstream& is, string key);
 
 private:
 	virtual void initialization(void* object);
@@ -18,6 +19,5 @@ private:
 	string subNum, subName;
 	//	받을 학년, 학점, 년도, 학기
 	int grade, credit, years, semester;
-
 };
 #endif
