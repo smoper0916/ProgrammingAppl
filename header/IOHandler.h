@@ -18,8 +18,6 @@ public:
 	virtual void* load(string key = "") = 0;
 
 private:
-	virtual void initialization(void* object) = 0;
-
 	string fileName;
 };
 
