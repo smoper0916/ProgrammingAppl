@@ -9,7 +9,7 @@ class AddSubject : public Transaction {
 public:
 	AddSubject(string fileName = "");
 
-	virtual void execute();
+	virtual void execute(string stNum);
 };
 
 #endif

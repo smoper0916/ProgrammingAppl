@@ -8,7 +8,7 @@
 class Transaction {
 public:
 	Transaction(string fileName){}
-	virtual void execute() = 0;
+	virtual void execute(string stNum) = 0;
 
 	string getFileName(){ return fileName; }
 	void setFIleName(string fileName){ this->fileName = fileName; }
