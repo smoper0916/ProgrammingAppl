@@ -1,6 +1,6 @@
 #include "IOStudent.h"
 
-void* IOStudent::load(string key = ""){
+void* IOStudent::load(string key){
 	ifstream is(getFileName());
 	
 	if (is.fail()){
@@ -32,3 +32,4 @@ void* IOStudent::get(ifstream& is, string key){
 	}
 	return NULL;
 }
+
