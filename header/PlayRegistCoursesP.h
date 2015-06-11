@@ -3,6 +3,10 @@
 
 #include "Screen.h"
 #include "Keypad.h"
+#include "CancelSubject.h"
+#include "AddSubject.h"
+#include "CheckBreakdown.h"
+#include "EnrollCourse.h"
 
 /*
 	수강신청 프로그램 전체 컨트롤러
@@ -16,9 +20,9 @@ private:
 	//	주요 메뉴 실행 함수
 	void playMainMenu(int grad, string pw);
 	//	수강신청 변경선택 함수
-	void playChangeCourse();
+	void playChangeCourse(string stNum);
 	//	내역 조회 선택함수
-	void playCheckCourse();
+	void playCheckCourse(string stNum);
 
 	//	contants corresponding of mainmenu
 	const static int REGISTCOURSE = 1;
@@ -34,6 +38,10 @@ private:
 	//	contants correspoding of checkcourse
 	const static int STUDENTS = 1;
 	const static int COURSES = 2;
+
+	// file names
+	const string CE_FILE = "CourseEnrollment.dat";
+	const string ES_FILE = "EstablishedSubject.dat";
 };
 
 #endif

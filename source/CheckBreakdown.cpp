@@ -1,6 +1,6 @@
 #include "CheckBreakdown.h"
 
-void CheckBreakdown::execute(){
+void CheckBreakdown::execute(string stNum){
 	Screen().BreakdownMenu();
 	int menuNum = Keypad().getNextInt();
 
@@ -31,7 +31,7 @@ void CheckBreakdown::printBySubject()
 {
 	IOCourseEnrollment ice(getFileName());
 	vector<CourseApplication>* cv = (vector<CourseApplication>*)ice.load();
-	IOEstablishedCourse iec(getFileName());
+	IOEstablishedCourse iec(getEstSubFileName());
 	vector<EstablishSubject>* ev = (vector<EstablishSubject>*)iec.load();
 
 	cout << "< 수강신청 내역(개설과목별) >" << endl;

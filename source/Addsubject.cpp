@@ -2,7 +2,7 @@
 
 AddSubject::AddSubject(string fileName) : Transaction(fileName) { }
 
-void AddSubject::execute() {
+void AddSubject::execute(string fileName) {
 	IOCourseEnrollment ioEnroll(getFileName());
 	string num;
 
