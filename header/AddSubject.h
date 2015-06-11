@@ -7,9 +7,19 @@
 
 class AddSubject : public Transaction {
 public:
-	AddSubject(string fileName = "");
+	AddSubject(string fileName = "", string esFileName);
 
 	virtual void execute(string stNum);
+
+private:
+	bool find(string num);
+
+	//	getter, setter
+	string getEstSubFileName(){ return estSubFileName; }
+	void setEstSubFileName(string estSubFileName) { this->estSubFileName = estSubFileName; }
+
+	string estSubFileName; // EstablishedSubject 리스트의 파일명
+
 };
 
 #endif
