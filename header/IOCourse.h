@@ -13,7 +13,6 @@ public:
 	virtual void* get(ifstream& is, string key);
 
 private:
-	virtual void initialization(void* object);
 
 	//	받을 과목코드, 과목명
 	string subNum, subName;

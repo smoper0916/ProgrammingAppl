@@ -7,6 +7,7 @@
 #include "AddSubject.h"
 #include "CheckBreakdown.h"
 #include "EnrollCourse.h"
+#include "IOStudent.h"
 
 /*
 	수강신청 프로그램 전체 컨트롤러
@@ -18,7 +19,7 @@ public:
 	void run();
 private:
 	//	주요 메뉴 실행 함수
-	void playMainMenu(int grad, string pw);
+	void playMainMenu(string stNum);
 	//	수강신청 변경선택 함수
 	void playChangeCourse(string stNum);
 	//	내역 조회 선택함수
@@ -41,7 +42,10 @@ private:
 
 	// file names
 	const string CE_FILE = "CourseEnrollment.dat";
-	const string ES_FILE = "EstablishedSubject.dat";
+	const string EC_FILE = "EstablishedCourse.dat";
+	const string ST_FILE = "Student.dat";
+	const string LE_FILE = "Lecturer.dat";
+	const string CO_FILE = "Course.dat";
 };
 
 #endif

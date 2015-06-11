@@ -7,7 +7,7 @@
 
 class AddSubject : public Transaction {
 public:
-	AddSubject(string fileName = "", string esFileName);
+	AddSubject(string fileName, string esFileName);
 
 	virtual void execute(string stNum);
 

@@ -4,7 +4,7 @@ IOCourse::IOCourse(string fileName) : IOHandler(fileName) {
 
 }
 
-void* IOCourse::load(string key = "") {
+void* IOCourse::load(string key) {
 	ifstream is(getFileName());
 
 	if (!is)	return NULL;

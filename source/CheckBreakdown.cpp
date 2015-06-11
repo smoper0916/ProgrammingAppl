@@ -21,7 +21,8 @@ void CheckBreakdown::printByStNum()
 {
 	IOCourseEnrollment ice(getFileName());
 	vector<CourseApplication>* v = (vector<CourseApplication>*)ice.load();
-
+	if (!v)
+		throw "아직 수강 신청을 한 사람이 없습니다.";
 	cout << "< 수강신청 내역(학생별) >" << endl;
 	for (vector<CourseApplication>::iterator iterPos = v->begin(); iterPos != v->end(); ++iterPos)
 		cout << *iterPos << endl;
@@ -33,6 +34,11 @@ void CheckBreakdown::printBySubject()
 	vector<CourseApplication>* cv = (vector<CourseApplication>*)ice.load();
 	IOEstablishedCourse iec(getEstSubFileName());
 	vector<EstablishSubject>* ev = (vector<EstablishSubject>*)iec.load();
+
+	if (!cv)
+		throw "아직 수강 신청을 한 사람이 없습니다.";
+	else if (!ev)
+		throw "아직 개설된 교과목이 존재하지 않습니다.";
 
 	cout << "< 수강신청 내역(개설과목별) >" << endl;
 	for (vector<EstablishSubject>::iterator iterPos = ev->begin(); iterPos != ev->end(); ++iterPos){

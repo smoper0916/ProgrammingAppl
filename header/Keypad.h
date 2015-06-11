@@ -8,16 +8,15 @@ using namespace std;
 class Keypad {
 public:
 	static int getNextInt() { 
+		int inputInt;
 		cin >> inputInt;
 		return inputInt; 
 	}
 	static string getNextStr() {
+		string inputStr;
 		cin >> inputStr;
 		return inputStr;
 	}
-private:
-	static int inputInt;
-	static string inputStr;
 };
 
 #endif

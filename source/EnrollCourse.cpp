@@ -18,7 +18,7 @@ void EnrollCourse::processMenu(int menuNum){
 }
 void EnrollCourse::execute(string stNum){
 	int menuNum;
-	as.execute(stNum);
+	as->execute(stNum);
 
 	Screen().ChangeCourseMenu();
 	menuNum = Keypad().getNextInt();

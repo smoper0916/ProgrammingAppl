@@ -1,26 +1,27 @@
 #include "PlayRegistCoursesP.h"
 
 void PlayRegistCoursesP::run() {
-	int gradNum;
-	string password;
+	string stNum;
 	
 	while (1) {
 		try {
-			Screen::displayMessage("학번과 비번을 입력하세요 : ");
-			gradNum = Keypad::getNextInt();
-			password = Keypad::getNextStr();
+			Screen::displayMessage("학번을 입력하세요 : ");
+			stNum = Keypad::getNextStr();
 
-			playMainMenu(gradNum, password);
+			Student* st = (Student*)IOStudent(ST_FILE).load(stNum);
+			if (!st)
+				throw "존재하지 않는 학번입니다.";
+			playMainMenu(stNum);
 		}
 		catch (const char* c) {
+			system("cls");
 			Screen::displayMessageLine(c);
 		}
 	}
 }
 
-void PlayRegistCoursesP::playMainMenu(int grad, string pw) {
+void PlayRegistCoursesP::playMainMenu(string stNum) {
 	Screen::MainMenu();
-	string stNum = to_string(grad);
 
 	while (1) {
 		switch (Keypad::getNextInt()) {
@@ -34,7 +35,7 @@ void PlayRegistCoursesP::playMainMenu(int grad, string pw) {
 			playCheckCourse(stNum);		
 			break;
 		case EXIT:
-			throw "\n종료합니다.";
+			exit(1);
 		default:
 			Screen::displayMessageLine("\n[오류] 선택 오류");
 			break;
@@ -44,6 +45,10 @@ void PlayRegistCoursesP::playMainMenu(int grad, string pw) {
 
 void PlayRegistCoursesP::playChangeCourse(string stNum)
 {
+	CourseApplication* ca = (CourseApplication*)IOCourseEnrollment(CE_FILE).load(stNum);
+	if (!ca)
+		throw "아직 수강 신청을 하지 않으셨습니다. 수강 신청 후 수강 변경 해주세요.";
+	
 	Screen::ChangeCourseMenu();
 	Transaction* tr = NULL;
 
@@ -53,7 +58,7 @@ void PlayRegistCoursesP::playChangeCourse(string stNum)
 		tr->execute(stNum);
 		break;
 	case ADDSUBJECT:
-		tr = new AddSubject(CE_FILE);
+		tr = new AddSubject(CE_FILE, EC_FILE);
 		tr->execute(stNum);
 		break;
 	case CHANGESUBJECT:
@@ -61,7 +66,7 @@ void PlayRegistCoursesP::playChangeCourse(string stNum)
 		tr = new CancelSubject(CE_FILE);
 		tr->execute(stNum);
 		delete tr;
-		tr = new AddSubject(CE_FILE);
+		tr = new AddSubject(CE_FILE, EC_FILE);
 		tr->execute(stNum);
 		break;
 	default:
@@ -71,9 +76,8 @@ void PlayRegistCoursesP::playChangeCourse(string stNum)
 
 void PlayRegistCoursesP::playCheckCourse(string stNum)
 {
-	Screen::BreakdownMenu();
 	Transaction* tr = NULL;
 
-	tr = new CheckBreakdown(CE_FILE, ES_FILE);
+	tr = new CheckBreakdown(CE_FILE, EC_FILE);
 	tr->execute(stNum);
 }

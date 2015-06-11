@@ -1,8 +1,8 @@
 #ifndef _IOESTABLISHEDCOURSE_H_
 #define _IOESTABLISHEDCOURSE_H_
 
-#include "IOHandler.h"
 #include "EstablishSubject.h"
+#include "IOCourse.h"
 
 class IOEstablishedCourse : public IOHandler {
 public:
@@ -13,10 +13,8 @@ public:
 	virtual void* get(ifstream& is, string key);
 
 private:
-	virtual void initialization(void* object);
-	
-	string subNum, lecNum;
-	int years, semester;
+	string subNum, subName, lecNum;
+	int years, semester, credit, grade;
 	vector<lectTime> lectTimeTemp;
 };
 #endif

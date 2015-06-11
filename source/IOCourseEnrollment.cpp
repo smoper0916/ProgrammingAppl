@@ -5,8 +5,8 @@ IOCourseEnrollment::IOCourseEnrollment(string fileName) : IOHandler(fileName) {
 }
 
 void IOCourseEnrollment::save(void* object) {
-	if (typeid(object) != typeid(CourseApplication))
-		throw "";
+	if (typeid(*(CourseApplication*)object) != typeid(CourseApplication))
+		throw "알맞지 않은 타입입니다.";
 	else {
 		CourseApplication* cApp = (CourseApplication*)object;
 		ofstream os;
@@ -15,8 +15,8 @@ void IOCourseEnrollment::save(void* object) {
 		os.open(getFileName(), ios::in || ios::out);
 		initialization(object);
 
-		if (!os) throw "";
-		if (find(object) == NULL)	throw "";
+		if (os.fail()) throw "파일을 열 수 없습니다.";
+		if (find(object) == NULL)	throw "찾을 수 없습니다.";
 				
 		os.seekp(find(object), ios::beg);
 		os << stNum << " ";
@@ -51,14 +51,13 @@ void IOCourseEnrollment::erase(void* object) {
 int IOCourseEnrollment::find(void* object) {
 	ifstream is(getFileName());
 	string temp;	int pos = 0;
+	CourseApplication* cApp = (CourseApplication*)object;
 
-	if (!is) throw "";
+	if (!is) throw "파일을 찾을 수 없습니다.";
 
-	if (typeid(object) != typeid(CourseApplication))
-		throw "";
+	if (typeid(*cApp) != typeid(CourseApplication))
+		throw "알맞지 않은 타입입니다.";
 	else {
-		CourseApplication* cApp = (CourseApplication*)object;
-
 		while (1) {
 			is >> temp;
 
@@ -125,15 +124,15 @@ void* IOCourseEnrollment::get(ifstream& is, string key) {
 
 	while (true) {
 		is >> stNum;
+		if (is.eof())	break;
 
 		while (true) {
 			is >> temp;
-			if (temp == "\n\r")	break;
+			if (is.peek() == '\n')	break;
 
 			subNum.push_back(temp);
 		}
 
-		if (is.eof())	break;
 		if (stNum == key)	return new CourseApplication(stNum, subNum);
 	}
 
@@ -142,11 +141,10 @@ void* IOCourseEnrollment::get(ifstream& is, string key) {
 }
 
 void IOCourseEnrollment::initialization(void* object) {
-	if (typeid(object) != typeid(CourseApplication))
-		throw "";
+	CourseApplication* cApp = (CourseApplication*)object;
+	if (typeid(*cApp) != typeid(CourseApplication))
+		throw "알맞지 않은 타입입니다.";
 	else {
-		CourseApplication* cApp = (CourseApplication*)object;
-
 		stNum = cApp->getGradNum();
 		subNum = cApp->getSubNum();
 	}

@@ -14,14 +14,13 @@ struct lectTime {
 
 class EstablishSubject {
 public:
-	EstablishSubject();
-	EstablishSubject(int y, int seme, string subNum, string lectNum, vector<lectTime> lcTime);
+	EstablishSubject(Subject s, string lecN, vector<lectTime> lec):sub(s), lectureTime(lec), lecNum(lecN){}
 
-	Subject getSubject();
+	Subject getSubject(){ return sub; }
 
 private:
-	Subject subject;
-	
+	Subject sub;
+	string lecNum;
 	vector<lectTime> lectureTime;
 };
 
